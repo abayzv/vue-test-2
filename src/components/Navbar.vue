@@ -30,7 +30,7 @@
           </button>
         </router-link>
       </div>
-      <div v-if="$store.getters.isAuth" class="flex items-center md:order-2">
+      <div @click="showMenu" v-if="$store.getters.isAuth" class="flex items-center md:order-2">
         <div
           class="overflow-hidden relative w-10 h-10 bg-gray-100 rounded-full dark:bg-gray-600"
         >
@@ -50,7 +50,8 @@
         <span class="text-sm mx-2 text-slate-500">{{ user.email }}</span>
       </div>
       <div
-        class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
+        v-if="show"
+        class="justify-between items-center w-full md:flex md:w-auto md:order-1"
         id="navbar-cta"
       >
         <ul
@@ -74,7 +75,7 @@
           <li v-if="$store.getters.isAuth">
             <button
               @click="logout"
-              class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+              class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white w-full"
               to="/about"
             >
               Logout
@@ -93,6 +94,7 @@ export default {
   data() {
     return {
       isLogin: store.getters.isAuth,
+      show: false,
     };
   },
   computed: {
@@ -103,6 +105,9 @@ export default {
       localStorage.removeItem("access_token");
       // force reload
       location.reload();
+    },
+    showMenu() {
+      this.show = !this.show;
     },
   },
 };
