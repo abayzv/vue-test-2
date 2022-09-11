@@ -3,29 +3,32 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginVue from '@/views/auth/Login.vue'
 import RegisterVue from '@/views/auth/Register.vue'
+import AboutViewVue from '../views/AboutView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
-    meta : {needAuth : true}
+    component : HomeView,
+    meta : {needAuth : true, title: 'Home'}
   },
   {
     path: '/signin',
     name: 'signin',
-    component: LoginVue
+    component: LoginVue,
+    meta : {title: 'Login'}
   },
   {
     path: '/register',
     name: 'register',
-    component: RegisterVue
+    component: RegisterVue,
+    meta : {title: 'Register'}
   },
   {
     path: '/about',
     name: 'about',
-    meta : {needAuth : true},
-    component: () => import('../views/AboutView.vue')
+    component : AboutViewVue,
+    meta : {needAuth : TrustedHTML, title: 'About'},
   }
 ]
 
@@ -35,6 +38,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  document.title = `${to.meta.title} | Bayu`
   if(to.matched.some(record => record.meta.needAuth)){
     let isAuth = store.getters.isAuth
     if(!isAuth){
