@@ -1,7 +1,6 @@
 <template>
     <div class="register">
-      <div class="container mx-auto p-10">
-        <div class="flex justify-center">
+      <div class="flex justify-center">
           <div
             class="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
           >
@@ -75,7 +74,6 @@
             </form>
           </div>
         </div>
-      </div>
     </div>
 </template>
 
