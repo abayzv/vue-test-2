@@ -1,31 +1,43 @@
 <template>
   <div class="home">
-    <div
-      class="p-4 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800"
-      role="alert"
-    >
-      <span class="font-medium">Wellcome !</span> {{ user.email }}
-    </div>
+    <Hero/>
+    <Data/>
   </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import Product from "@/components/Product.vue";
+import Data from "@/components/Data.vue";
+import Hero from "@/components/Hero.vue";
 export default {
   computed: {
     ...mapState("user", ["user"]),
+    ...mapState("data", ["data"]),
   },
   methods: {
     ...mapActions("user", ["fetchUser"]),
+    ...mapActions("data", ["fetchData"]),
     async _fetchUser() {
       try {
         await this.fetchUser();
-      } catch (error) {
+      }
+      catch (error) {
+        console.log(error);
+      }
+    },
+    async _fetchData() {
+      try {
+        await this.fetchData();
+      }
+      catch (error) {
         console.log(error);
       }
     },
   },
   created() {
     this._fetchUser();
+    this._fetchData();
   },
+  components: { Product, Data, Hero }
 };
 </script>

@@ -1,9 +1,7 @@
 <template>
   <div class="bg-slate-100 min-h-screen">
     <Navbar />
-    <div class="container mx-auto p-10">
-      <router-view />
-    </div>
+    <router-view />
     <Footer/>
   </div>
 </template>
